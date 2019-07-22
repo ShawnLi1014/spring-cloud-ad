@@ -48,7 +48,7 @@ public class AdPlanServiceImpl implements IAdPlanService {
                 request.getUserId(), request.getPlanName()
         );
         if (oldPlan != null) {
-            throw new AdException(Constants.ErrorMsg.SAME_PLAN_ERROR);
+            throw new AdException(Constants.ErrorMsg.SAME_NAME_PLAN_ERROR);
         }
         AdPlan newAdPlan = planRepository.save (
                 new AdPlan(request.getUserId(),
@@ -104,6 +104,7 @@ public class AdPlanServiceImpl implements IAdPlanService {
         if (!request.deleteValidate()) {
             throw new AdException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
         }
+
         AdPlan plan = planRepository.findByIdAndUserId(request.getId(), request.getUserId());
         if (plan == null) {
             throw new AdException(Constants.ErrorMsg.CAN_NOT_FIND_RECORD);
