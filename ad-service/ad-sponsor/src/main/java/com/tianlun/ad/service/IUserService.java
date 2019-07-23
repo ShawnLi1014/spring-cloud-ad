@@ -10,4 +10,5 @@ public interface IUserService {
      * <h2>Create User</h2>
      */
     CreateUserResponse createUser(CreateUserRequest request) throws AdException;
+    // TODO: Add read update and delete
 }

@@ -2,9 +2,7 @@ package com.tianlun.ad.service;
 
 import com.tianlun.ad.entity.AdUnit;
 import com.tianlun.ad.exception.AdException;
-import com.tianlun.ad.vo.AdUnitGetRequest;
-import com.tianlun.ad.vo.AdUnitRequest;
-import com.tianlun.ad.vo.AdUnitResponse;
+import com.tianlun.ad.vo.*;
 
 public interface IAdUnitService {
 
@@ -15,4 +13,12 @@ public interface IAdUnitService {
     AdUnitResponse updateAdUnit(AdUnitRequest request) throws AdException;
 
     void deleteAdUnit(AdUnitRequest request) throws AdException;
+
+    AdUnitKeywordResponse createUnitKeyword(AdUnitKeywordRequest request) throws AdException;
+
+    AdUnitItResponse createUnitIt(AdUnitItRequest request) throws AdException;
+
+    AdUnitDistrictResponse createUnitDistrict(AdUnitDistrictRequest request) throws AdException;
+
+    // TODO: Add delete and get for unit conditions
 }
