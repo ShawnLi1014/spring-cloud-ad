@@ -4,14 +4,17 @@ import com.tianlun.ad.constant.CommonStatus;
 import com.tianlun.ad.constant.Constants;
 import com.tianlun.ad.dao.AdPlanRepository;
 import com.tianlun.ad.dao.AdUnitRepository;
+import com.tianlun.ad.dao.CreativeRepository;
 import com.tianlun.ad.dao.unit_condition.AdUnitDistrictRepository;
 import com.tianlun.ad.dao.unit_condition.AdUnitItRepository;
 import com.tianlun.ad.dao.unit_condition.AdUnitKeywordRepository;
+import com.tianlun.ad.dao.unit_condition.CreativeUnitRepository;
 import com.tianlun.ad.entity.AdPlan;
 import com.tianlun.ad.entity.AdUnit;
 import com.tianlun.ad.entity.unit_condition.AdUnitDistrict;
 import com.tianlun.ad.entity.unit_condition.AdUnitIt;
 import com.tianlun.ad.entity.unit_condition.AdUnitKeyword;
+import com.tianlun.ad.entity.unit_condition.CreativeUnit;
 import com.tianlun.ad.exception.AdException;
 import com.tianlun.ad.service.IAdUnitService;
 import com.tianlun.ad.vo.*;
@@ -30,17 +33,23 @@ public class AdUnitServiceImpl implements IAdUnitService {
     private final AdUnitKeywordRepository adUnitKeywordRepository;
     private final AdUnitItRepository adUnitItRepository;
     private final AdUnitDistrictRepository adUnitDistrictRepository;
+    private final CreativeRepository creativeRepository;
+    private final CreativeUnitRepository creativeUnitRepository;
 
     public AdUnitServiceImpl(AdPlanRepository adPlanRepository,
                              AdUnitRepository adUnitRepository,
                              AdUnitKeywordRepository adUnitKeywordRepository,
                              AdUnitItRepository adUnitItRepository,
-                             AdUnitDistrictRepository adUnitDistrictRepository) {
+                             AdUnitDistrictRepository adUnitDistrictRepository,
+                             CreativeRepository creativeRepository,
+                             CreativeUnitRepository creativeUnitRepository) {
         this.adPlanRepository = adPlanRepository;
         this.adUnitRepository = adUnitRepository;
         this.adUnitKeywordRepository = adUnitKeywordRepository;
         this.adUnitItRepository = adUnitItRepository;
         this.adUnitDistrictRepository = adUnitDistrictRepository;
+        this.creativeRepository = creativeRepository;
+        this.creativeUnitRepository = creativeUnitRepository;
     }
 
     @Override
@@ -125,6 +134,7 @@ public class AdUnitServiceImpl implements IAdUnitService {
     }
 
     @Override
+    @Transactional
     public AdUnitKeywordResponse createUnitKeyword(AdUnitKeywordRequest request) throws AdException {
         List<Long> unitIds = request.getUnitKeywords().stream()
                 .map(AdUnitKeywordRequest.UnitKeyword::getUnitId)
@@ -151,6 +161,7 @@ public class AdUnitServiceImpl implements IAdUnitService {
     }
 
     @Override
+    @Transactional
     public AdUnitItResponse createUnitIt(AdUnitItRequest request) throws AdException {
         List<Long> unitIds = request.getUnitIts().stream()
                 .map(AdUnitItRequest.UnitIt::getUnitId)
@@ -176,6 +187,7 @@ public class AdUnitServiceImpl implements IAdUnitService {
     }
 
     @Override
+    @Transactional
     public AdUnitDistrictResponse createUnitDistrict(AdUnitDistrictRequest request) throws AdException {
         List<Long> unitIds = request.getUnitDistricts().stream()
                 .map(AdUnitDistrictRequest.UnitDistrict::getUnitId)
@@ -197,6 +209,33 @@ public class AdUnitServiceImpl implements IAdUnitService {
         return new AdUnitDistrictResponse(ids);
     }
 
+    @Override
+    @Transactional
+    public CreativeUnitResponse createCreativeUnit(CreativeUnitRequest request) throws AdException {
+
+        List<Long> unitIds = request.getCreativeUnitItems().stream()
+                .map(CreativeUnitRequest.CreativeUnitItem::getUnitId)
+                .collect(Collectors.toList());
+        List<Long> creativeIds = request.getCreativeUnitItems().stream()
+                .map(CreativeUnitRequest.CreativeUnitItem::getCreativeId)
+                .collect(Collectors.toList());
+
+        if (!isRelatedUnitExist(unitIds) && isRelatedCreativeExist(creativeIds)) {
+            throw new AdException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+        }
+
+        List<CreativeUnit> creativeUnits = new ArrayList<>();
+        request.getCreativeUnitItems().forEach(i -> creativeUnits.add(
+                new CreativeUnit(i.getCreativeId(), i.getUnitId())
+        ));
+
+        List<Long> ids = creativeUnitRepository.saveAll(creativeUnits).stream().
+                map(CreativeUnit::getCreativeId).collect(Collectors.toList());
+
+        return new CreativeUnitResponse(ids);
+    }
+
+
     private boolean isRelatedUnitExist(List<Long> unitIds) {
         if (CollectionUtils.isEmpty(unitIds)) {
             return false;
@@ -204,4 +243,14 @@ public class AdUnitServiceImpl implements IAdUnitService {
 
         return adUnitRepository.findAllById(unitIds).size() == new HashSet<>(unitIds).size();
     }
+
+    private boolean isRelatedCreativeExist(List<Long> creativeIds) {
+        if(CollectionUtils.isEmpty(creativeIds)) {
+            return false;
+        }
+
+        return creativeRepository.findAllById(creativeIds).size() == new HashSet<>(creativeIds).size();
+    }
+
+
 }

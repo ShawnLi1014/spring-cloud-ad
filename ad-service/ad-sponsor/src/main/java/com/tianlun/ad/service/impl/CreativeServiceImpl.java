@@ -10,6 +10,7 @@ import com.tianlun.ad.service.ICreativeService;
 import com.tianlun.ad.vo.CreativeRequest;
 import com.tianlun.ad.vo.CreativeResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ public class CreativeServiceImpl implements ICreativeService {
     }
 
     @Override
+    @Transactional
     public CreativeResponse createCreative(CreativeRequest request) throws AdException {
 
         if (!request.validate()) {

@@ -50,6 +50,6 @@ public class CommonResponseDataAdvice implements ResponseBodyAdvice<Object> {
         } else {
             response.setData(o);
         }
-        return null;
+        return response;
     }
 }

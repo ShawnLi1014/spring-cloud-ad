@@ -29,7 +29,7 @@ public class AdUnitDistrict {
     private String province;
 
     @Basic
-    @Column(name = "province", nullable = false)
+    @Column(name = "city", nullable = false)
     private String city;
 
     public AdUnitDistrict(Long unitId, String province, String city) {

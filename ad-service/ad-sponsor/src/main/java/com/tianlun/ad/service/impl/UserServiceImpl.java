@@ -37,8 +37,9 @@ public class UserServiceImpl implements IUserService {
         AdUser newUser = adUserRepository.save(new AdUser(
                 request.getUsername(),
                 CommonUtils.md5(request.getUsername())));
-
-        return new CreateUserResponse(newUser.getId(), newUser.getUsername(), newUser.getToken(),
+        CreateUserResponse cur = new CreateUserResponse(newUser.getId(), newUser.getUsername(), newUser.getToken(),
                 newUser.getCreateTime(), newUser.getUpdateTime());
+        System.out.println(cur.getUsername());
+        return cur;
     }
 }

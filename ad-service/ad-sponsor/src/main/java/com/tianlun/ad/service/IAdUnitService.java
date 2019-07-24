@@ -21,4 +21,8 @@ public interface IAdUnitService {
     AdUnitDistrictResponse createUnitDistrict(AdUnitDistrictRequest request) throws AdException;
 
     // TODO: Add delete and get for unit conditions
+
+    CreativeUnitResponse createCreativeUnit(CreativeUnitRequest request) throws AdException;
+
+    // TODO: Add get update and delete service
 }
