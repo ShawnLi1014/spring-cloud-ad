@@ -77,6 +77,7 @@ public class UnitKeywordIndex implements IndexAware<String, Set<Long>> {
             Set<String> keywordSet = CommonUtils.getOrCreate(
                     unitId, unitKeywordMap, ConcurrentSkipListSet::new
             );
+            keywordSet.remove(key);
         }
 
         log.info("UnitKeywordIndex after delete: {}", unitKeywordMap);
