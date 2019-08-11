@@ -22,6 +22,7 @@ import com.tianlun.ad.entity.unit_condition.CreativeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.CollectionUtils;
@@ -39,29 +40,20 @@ import java.util.List;
 @SpringBootTest(classes = {Application.class}, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class DumpDataService {
 
+    @Autowired
     private AdPlanRepository planRepository;
+    @Autowired
     private AdUnitRepository unitRepository;
+    @Autowired
     private CreativeRepository creativeRepository;
+    @Autowired
     private CreativeUnitRepository creativeUnitRepository;
+    @Autowired
     private AdUnitDistrictRepository districtRepository;
+    @Autowired
     private AdUnitItRepository itRepository;
+    @Autowired
     private AdUnitKeywordRepository keywordRepository;
-
-    public DumpDataService(AdPlanRepository planRepository,
-                           AdUnitRepository unitRepository,
-                           CreativeRepository creativeRepository,
-                           CreativeUnitRepository creativeUnitRepository,
-                           AdUnitDistrictRepository districtRepository,
-                           AdUnitItRepository itRepository,
-                           AdUnitKeywordRepository keywordRepository) {
-        this.planRepository = planRepository;
-        this.unitRepository = unitRepository;
-        this.creativeRepository = creativeRepository;
-        this.creativeUnitRepository = creativeUnitRepository;
-        this.districtRepository = districtRepository;
-        this.itRepository = itRepository;
-        this.keywordRepository = keywordRepository;
-    }
 
     @Test
     public void dumpAdTableData() {
@@ -72,7 +64,7 @@ public class DumpDataService {
                 String.format("%s%s", DConstant.DATA_ROOT_DIR, DConstant.AD_UNIT)
         );
         dumpAdCreativeTable(
-                String.format("%s%s", DConstant.DATA_ROOT_DIR, DConstant.Ad_CREATIVE)
+                String.format("%s%s", DConstant.DATA_ROOT_DIR, DConstant.AD_CREATIVE)
         );
         dumpAdCreativeUnitTable(
                 String.format("%s%s", DConstant.DATA_ROOT_DIR, DConstant.AD_CREATIVE_UNIT)

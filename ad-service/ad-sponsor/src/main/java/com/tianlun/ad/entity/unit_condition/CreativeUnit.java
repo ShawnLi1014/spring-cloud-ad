@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ad_creative_unit")
+@Table(name = "creative_unit")
 public class CreativeUnit {
 
     @Id
