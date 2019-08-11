@@ -31,7 +31,7 @@ public class IndexFileLoader {
         ));
 
         List<String> adCreativeStrings = loadDumpData(
-                String.format("%s%s", DConstant.DATA_ROOT_DIR, DConstant.Ad_CREATIVE)
+                String.format("%s%s", DConstant.DATA_ROOT_DIR, DConstant.AD_CREATIVE)
         );
         adCreativeStrings.forEach(c -> AdLevelDataHandler.handleLevel2(
                 JSON.parseObject(c, CreativeTable.class),
