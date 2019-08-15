@@ -1,0 +1,61 @@
+{
+  "featureInfo":{
+    "districtFeature":{
+      "districts":[
+        {
+          "city":"合肥市",
+          "province":"安徽省"
+        }
+      ]
+    },
+    "itFeature":{
+      "its":[
+        "台球"
+      ]
+    },
+    "keywordFeature":{
+      "keywords":[
+        "宝马, 标志"
+      ]
+    },
+    "relation":"AND"
+  },
+  "mediaId":"imooc-ad",
+  "requestInfo":{
+    "adSlots":[
+      {
+        "adSlotCode":"ad-y",
+        "height":720,
+        "minCpm":10000,
+        "positionType":1,
+        "type":[
+          1,
+          2
+        ],
+        "width":1080
+      }
+    ],
+    "app":{
+      "activityName":"video",
+      "appCode":"imooc",
+      "appName":"imooc",
+      "packageName":"com.immoc"
+    },
+    "device":{
+      "deviceCode":"iPhone",
+      "displaySize":"1080 * 720",
+      "ip":"127.0.0.1",
+      "mac":"0xxxxx",
+      "model":"x",
+      "screenSize":"1080 * 720",
+      "serialName":"12345"
+    },
+    "geo":{
+      "city":"Beijing",
+      "latitude":100.28,
+      "longitude":88.61,
+      "province":"Beijing"
+    },
+    "requestId":"aaa"
+  }
+}

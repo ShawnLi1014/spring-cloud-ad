@@ -23,13 +23,14 @@ public class IndexSender implements ISender {
     public void sender(MySqlRowData rowData) {
 
         String level = rowData.getLevel();
+        log.info("level: {}", level);
 
         // 增量数据的投递； 将mysqlRowData 变为 table类型
-        if (level == DataLevel.LEVEL2.getLevel()) {
+        if (level.equals( DataLevel.LEVEL2.getLevel())) {
             Level2RowData(rowData);
-        } else if (level == DataLevel.LEVEL3.getLevel()) {
+        } else if (level.equals(DataLevel.LEVEL3.getLevel())) {
             Level3RowData(rowData);
-        } else if (level == DataLevel.LEVEL4.getLevel()) {
+        } else if (level.equals(DataLevel.LEVEL4.getLevel())) {
             Level4RowData(rowData);
         } else {
             log.error("MysqlRowData ERROR: {}", JSON.toJSONString(rowData));

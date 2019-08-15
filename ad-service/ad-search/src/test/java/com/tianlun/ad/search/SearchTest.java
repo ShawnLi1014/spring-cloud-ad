@@ -67,11 +67,11 @@ public class SearchTest {
         ));
 
         request.setFeatureInfo(buildExampleFeatureInfo(
-                Arrays.asList("宝马", "大众", "标志"),
+                Arrays.asList("宝马"),
                 Collections.singletonList(
                         new DistrictFeature.ProvinceAndCity("安徽省", "合肥市")),
-                Arrays.asList("台球", "游泳"),
-                FeatureRelation.AND
+                Arrays.asList("台球"),
+                FeatureRelation.OR
                 )
         );
         System.out.println(JSON.toJSONString(request));
@@ -93,8 +93,8 @@ public class SearchTest {
                 "0xxxxx",
                 "127.0.0.1",
                 "x",
-                "1280 * 720",
-                "1280 * 720",
+                "1080 * 720",
+                "1080 * 720",
                 "12345"
         );
     }
