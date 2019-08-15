@@ -1,32 +1,23 @@
-package com.tianlun.ad.sender.kafka;
+package com.tianlun.ad.consumer;
 
 import com.alibaba.fastjson.JSON;
-import com.tianlun.ad.mysql.dto.MySqlRowData;
+import com.tianlun.ad.dto.MySqlRowData;
 import com.tianlun.ad.sender.ISender;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Component("kafkaSender")
-public class KafkaSender implements ISender {
+@Component
+@Slf4j
+public class BinlogConsumer {
 
-    @Value("${adconf.kafka.topic}")
-    private String topic;
+    private final ISender sender;
 
-    private final KafkaTemplate kafkaTemplate;
-
-    public KafkaSender(KafkaTemplate kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
-
-    @Override
-    public void sender(MySqlRowData rowData) {
-
-        kafkaTemplate.send(topic, JSON.toJSONString(rowData));
+    public BinlogConsumer(ISender sender) {
+        this.sender = sender;
     }
 
     @KafkaListener(topics = {"ad-search-mysql-data"}, groupId = "ad-search")
@@ -38,8 +29,9 @@ public class KafkaSender implements ISender {
                     message.toString(),
                     MySqlRowData.class
             );
-            System.out.println("kafka processMysqlRowData: " + JSON.toJSONString(rowData));
+
+            log.info("kafka process mysql row data: {}", JSON.toJSONString(rowData));
+            sender.sender(rowData);
         }
     }
-
 }

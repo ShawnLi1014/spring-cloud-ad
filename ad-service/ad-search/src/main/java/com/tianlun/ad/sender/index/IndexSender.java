@@ -1,11 +1,11 @@
 package com.tianlun.ad.sender.index;
 
 import com.alibaba.fastjson.JSON;
+import com.tianlun.ad.constant.Constant;
+import com.tianlun.ad.dto.MySqlRowData;
 import com.tianlun.ad.dump.table.*;
 import com.tianlun.ad.handler.AdLevelDataHandler;
 import com.tianlun.ad.index.DataLevel;
-import com.tianlun.ad.mysql.constant.Constant;
-import com.tianlun.ad.mysql.dto.MySqlRowData;
 import com.tianlun.ad.sender.ISender;
 import com.tianlun.ad.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Component("indexSender")
+@Component
 public class IndexSender implements ISender {
 
     @Override

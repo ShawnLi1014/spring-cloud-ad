@@ -1,6 +1,6 @@
 package com.tianlun.ad.sender;
 
-import com.tianlun.ad.mysql.dto.MySqlRowData;
+import com.tianlun.ad.dto.MySqlRowData;
 
 public interface ISender {
 

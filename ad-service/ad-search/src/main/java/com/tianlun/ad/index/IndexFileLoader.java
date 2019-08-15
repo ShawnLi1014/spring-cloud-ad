@@ -1,10 +1,10 @@
 package com.tianlun.ad.index;
 
 import com.alibaba.fastjson.JSON;
+import com.tianlun.ad.constant.OpType;
 import com.tianlun.ad.dump.DConstant;
 import com.tianlun.ad.dump.table.*;
 import com.tianlun.ad.handler.AdLevelDataHandler;
-import com.tianlun.ad.mysql.constant.OpType;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 

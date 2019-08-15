@@ -1,6 +1,7 @@
 package com.tianlun.ad.handler;
 
 import com.alibaba.fastjson.JSON;
+import com.tianlun.ad.constant.OpType;
 import com.tianlun.ad.dump.table.*;
 import com.tianlun.ad.index.DataTable;
 import com.tianlun.ad.index.IndexAware;
@@ -15,7 +16,6 @@ import com.tianlun.ad.index.creativeUnit.CreativeUnitObject;
 import com.tianlun.ad.index.district.UnitDistrictIndex;
 import com.tianlun.ad.index.interest.UnitItIndex;
 import com.tianlun.ad.index.keyword.UnitKeywordIndex;
-import com.tianlun.ad.mysql.constant.OpType;
 import com.tianlun.ad.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 
