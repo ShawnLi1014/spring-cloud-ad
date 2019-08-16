@@ -6,7 +6,7 @@ import com.tianlun.ad.constant.OpType;
 import com.tianlun.ad.dto.BinlogRowData;
 import com.tianlun.ad.dto.MySqlRowData;
 import com.tianlun.ad.dto.TableTemplate;
-import com.tianlun.ad.sender.ISender;
+import com.tianlun.ad.sender.IKafkaSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ import java.util.Map;
 public class IncrementListener implements Ilistener {
 
     @Resource
-    private ISender sender;
+    private IKafkaSender sender;
 
     private final AggregationListener aggregationListener;
 

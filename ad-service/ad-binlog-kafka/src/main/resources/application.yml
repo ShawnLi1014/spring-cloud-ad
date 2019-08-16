@@ -14,7 +14,7 @@ spring:
       hibernate.format_sql: true
     open-in-view: false
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/ad_data?autoReconnect=true
+    url: jdbc:mysql://127.0.0.1:3306/ad_data?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: chaoren961014
     driver-class-name: com.mysql.cj.jdbc.Driver
