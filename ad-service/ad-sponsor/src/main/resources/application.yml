@@ -26,4 +26,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://server1:8000/eureka/
+logging:
+  config: classpath:logback.xml
+  file: ad-sponsor.log
 
